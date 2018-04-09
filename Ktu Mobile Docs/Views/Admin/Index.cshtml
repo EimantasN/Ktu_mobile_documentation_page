@@ -1,0 +1,94 @@
+﻿@model IndexAdmin
+<h2>All tables</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Table
+            </th>
+            <th>
+                List's
+            </th>
+            <th>
+                Action
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                Documentation
+            </td>
+            <td>
+                <a asp-action="CategoryIndex">View all</a>
+            </td>
+            <td>
+                <a asp-action="CategoryCreate">Create</a>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                Team Members
+            </td>
+            <td>
+                <a asp-action="UsersIndex">Member list</a>
+            </td>
+            <td>
+                <a asp-action="UsersEdit" asp-route-id="@Model.UserID.Id">Edit Info</a>
+                
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                Page info
+            </td>
+            <td>
+                <a asp-action="Info">View</a>
+            </td>
+            <td>
+                <a asp-action="Update">Edit</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Logger</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                User
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                Date
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach (var data in Model.GetLogToDispay())
+            {
+                <tr>
+                    <td>
+                        @data.User
+                    </td>
+                    <td>
+                        @data.Desc
+                    </td>
+                    <td>
+                        @data.Created
+                    </td>
+                </tr>
+            }
+        }
+
+    </tbody>
+</table>

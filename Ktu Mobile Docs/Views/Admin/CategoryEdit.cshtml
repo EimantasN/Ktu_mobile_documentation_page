@@ -1,0 +1,48 @@
+﻿@model KTU_Mobile_Data.Category
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<h4>Category</h4>
+<hr />
+<div class="row">
+    <div class="col-12">
+        <form asp-action="CategoryEdit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Nr" class="control-label"></label>
+                <input asp-for="Nr" class="form-control" />
+                <span asp-validation-for="Nr" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="focusedinput" class="control-label">Text</label><br />
+                <textarea asp-for="Text" required name="text" ></textarea>
+                <span asp-validation-for="Text" class="text-danger"></span>
+                <div class="col-sm-12 jlkdfj1">
+                    <p class="help-block">You can just paste text from every text editor word and so on</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Created" class="control-label"></label>
+                <input asp-for="Created" class="form-control" />
+                <span asp-validation-for="Created" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="CategoryIndex">Back to List</a>
+</div>

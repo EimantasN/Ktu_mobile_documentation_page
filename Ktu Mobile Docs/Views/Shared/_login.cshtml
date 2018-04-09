@@ -1,0 +1,14 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using KTU_Mobile_Data
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <p class="navbar-text navbar-right" style="padding-right: 15px;">Signed in as <a asp-controller="Admin" asp-action="Index" class="navbar-link">@UserManager.GetUserName(User)</a></p>
+}
+else
+{
+    <p class="navbar-text navbar-right" style="padding-right: 15px;"><a asp-controller="Admin" asp-action="Login" class="navbar-link">Signed in</a></p>
+}

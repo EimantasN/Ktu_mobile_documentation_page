@@ -1,0 +1,36 @@
+﻿@model KTU_Mobile_Data.Main_page
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Main_page</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Git_hub_link)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Git_hub_link)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Gmail)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Gmail)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Google_store_app)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Google_store_app)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Update" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Home</a>
+</div>

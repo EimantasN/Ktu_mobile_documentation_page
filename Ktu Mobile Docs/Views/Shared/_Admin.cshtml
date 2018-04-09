@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] KTU MOBILE APP</title>
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/font-awesome.css">
+        <link rel="stylesheet" href="~/css/icon-font.min.css" />
+        <link rel="stylesheet" href="~/css/admin.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link href="//fonts.googleapis.com/css?family=Cabin:400,400italic,500,500italic,600,600italic,700,700italic"
+              rel="stylesheet" type="text/css" asp-append-version="true">
+        <link rel="stylesheet" href="~/css/admin.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/font-awesome.css">
+        <link rel="stylesheet" href="~/css/icon-font.min.css" />
+    </environment>
+</head>
+<body class="sticky-header left-side-collapsed">
+    @*=============================================================================================================*@
+    <section>
+
+        @{
+            Html.RenderPartial("~/Views/Admin/_side_navigation.cshtml");
+        }
+        <div class="main-content">
+
+            <div class="header-section">
+
+                @{
+                    Html.RenderPartial("~/Views/Admin/_top_navigation.cshtml");
+                }
+            </div>
+            <div class="container" style="padding: 35px; padding-bottom: 100px;">
+                @RenderBody()
+            </div>
+        </div>
+    </section>
+
+    @*=============================================================================================================*@
+
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="//cdn.ckeditor.com/4.7.2/full/ckeditor.js" asp-append-version="true"></script>
+        <script src="~/js/scripts.js" asp-append-version="true"></script>
+        <script asp-append-version="true">
+            CKEDITOR.replace('Text');
+            CKEDITOR.replace('Subtext');
+        </script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="//cdn.ckeditor.com/4.7.2/full/ckeditor.js" asp-append-version="true"></script>
+        <script src="~/js/scripts.js" asp-append-version="true"></script>
+        <script asp-append-version="true">
+            CKEDITOR.replace('Text');
+            CKEDITOR.replace('Subtext');
+        </script>
+    </environment>
+    @RenderSection("Scripts", false)
+</body>
+</html>

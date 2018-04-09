@@ -1,0 +1,60 @@
+﻿@model Ktu_Mobile_Docs.Models.Docs
+@{
+    Layout = "~/Views/Shared/_doc.cshtml";
+}
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom:120px;">
+
+    <div class="navbar-header">
+        <a class="navbar-brand" href="#">KTU MOBILE</a>
+        @{
+            @await Html.PartialAsync("_login")
+        }
+    </div>
+</nav>
+
+<div class="container-fluid" style="margin-top:50px;">
+    <div class="row">
+        <div class="tocify col-sm-3 col-md-3">
+            <div id="toc">
+            </div><!--/.well -->
+        </div><!--/span-->
+        <div class="col-sm-9 col-md-9">
+            <div class="jumbotron">
+                <h1>KTU MOBILE</h1>
+                <br><br>
+
+                <h2>@Model.info.First().Name</h2>
+                <p>@Model.info.First().Text</p>
+                <br>
+            </div>
+            @{
+                int nr = 2;
+                bool yra = true;
+                while (yra)
+                {
+                    yra = false;
+                    try
+                    {
+                        var item = Model.info.First(x => x.Nr == nr);
+                        if (item != null)
+                        {
+                            yra = true;
+                            nr++;
+                            <h2>@item.Name</h2>
+                            <br>
+                            <div class="well">
+                                @Html.Raw(item.Text)
+                            </div>
+                            <br>
+                        }
+                    }
+                    catch
+                    {
+                        yra = false;
+                    }
+                }
+
+            }
+        </div>
+    </div><!--/row-->
+</div><!--/.fluid-container-->

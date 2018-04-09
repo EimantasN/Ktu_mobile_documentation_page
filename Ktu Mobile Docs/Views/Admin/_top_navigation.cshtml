@@ -1,0 +1,45 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using KTU_Mobile_Data
+
+@inject KTU_Mobile_Services.IData service
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+<!--notification menu start -->
+<div class="menu-right">
+
+    <div class="user-panel-top">
+
+        <div class="profile_details">
+            <ul>
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    var member = await service.GetMember(UserManager.GetUserName(User));
+                    <li class="dropdown profile_details_drop">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                            <div class="profile_img">
+                                <span style="background: url(@member.Image) no-repeat center; background-size: contain"> </span>
+                                <div class="user-name">
+                                    @{
+                                        try
+                                        {
+                                            string[] info = member.Name.Split(" ");
+                                            <p>@info[0]<span>@info[1]</span></p>
+                                        }
+                                        catch
+                                        {
+                                            <p>Susitvarkyk varda</p>
+                                        }
+                                    }
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </li>
+                    <div class="clearfix"> </div>
+                }
+            </ul>
+        </div>
+
+        <div class="clearfix"></div>
+    </div>
+</div>

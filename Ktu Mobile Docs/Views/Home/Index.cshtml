@@ -1,0 +1,234 @@
+﻿@model Ktu_Mobile_Docs.Models.MainPage
+@{
+    ViewData["Title"] = "Main page";
+}
+
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top" style="padding-top: 1.3rem; font-size: 15px">KTU MOBILE</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#about">Apie mūsų idėją</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#services">Tikslai</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#portfolio">Komanda</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#doc">Dokumentacija</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#contact">Susisiekti</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<header class="masthead text-center text-white d-flex">
+    <div class="container my-auto">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <h1 class="text-uppercase">
+                    <strong>KTU MOBILE</strong>
+                </h1>
+                <hr>
+            </div>
+            <div class="col-lg-8 mx-auto">
+                <p class="text-faded mb-5">Visos KTU sistemos android programėlėje</p>
+                <a class="btn btn-dark btn-xl js-scroll-trigger" href="@Model.Google_store_app">Atsisiųsti app</a>
+                <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">Sužinoti daugiau</a>
+                <a class="btn btn-info btn-xl js-scroll-trigger" href="@Model.Git_hub_link">Source CODE</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section class="bg-primary" id="about">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="section-heading text-white">Projekto idėja</h2>
+                <hr class="light my-4">
+                <p class="text-faded mb-4">Atsižvelgus į kasdienes studento problemas kartu su komanda sugalvojome Stelper mobiliosios programėlės idėją. Tai programėlė, leidžianti studentui lengviau pasiruošti atsiskaitymams ir planuoti mokymosi laiką.</p>
+                <a class="btn btn-light btn-xl js-scroll-trigger" href="#services">Pradėkime!</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="services">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Viskas dėl kokybės</h2>
+                <hr class="my-4">
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="service-box mt-5 mx-auto">
+                    <i class="fa fa-2x fa-diamond text-primary mb-3 sr-icons"></i>
+                    <h3 class="mb-3 service-header">Patikimumas</h3>
+                    <p class="text-muted mb-0 service-text">Musų programa kuriama su naujausiais įrankiais</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="service-box mt-5 mx-auto">
+                    <i class="fa fa-2x fa-paper-plane text-primary mb-3 sr-icons"></i>
+                    <h3 class="mb-3 service-header">Visada parengta naudojimui</h3>
+                    <p class="text-muted mb-0 service-text">Užtikrintas programos veikimas</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="service-box mt-5 mx-auto">
+                    <i class="fa fa-2x fa-newspaper-o text-primary mb-3 sr-icons"></i>
+                    <h3 class="mb-3 service-header">Atnaujinimai</h3>
+                    <p class="text-muted mb-0 service-text">Mes atnaujiname priklausomybes, kad viskas būtų šviežia</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="service-box mt-5 mx-auto">
+                    <i class="fa fa-2x fa-heart text-primary mb-3 sr-icons"></i>
+                    <h3 class="mb-sm-3 service-header">Pagaminta su studentų studentams</h3>
+                    <p class="text-muted mb-0 service-text">Kuriame tik tai kas naudinga</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="portfolio" class="section team-section pb-5" style="background-color: #F05F40 ">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="section-heading" style="color: white">Musų komanda</h2>
+                <hr class="light my-4">
+                <p class="text-faded mb-4">Susipažinkime</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid" style="margin-bottom: 25px;">
+        <div class="row text-center">
+
+            <!-- Grid column -->
+            @{
+                foreach (var member in Model.Memebers)
+                {
+                    <div class="col-lg-3 col-md-6 mb-r">
+                        <div class="card card-body">
+                            @{
+                                if (member != null)
+                                {
+                                    <div class="avatar mt-3">
+                                        <img src="@member.Image" class="rounded-circle" alt="@member.Name">
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="avatar mt-3">
+                                        <img src="http://www.pvhc.net/img78/awieakwtfdcrybffbtii.png" class="rounded-circle" alt="@member.Name">
+                                    </div>
+                                }
+                            }
+
+                            <h5 class="font-bold">
+                                <strong>@member.Name</strong>
+                            </h5>
+                            <p class="grey-text">@member.Pareigos</p>
+
+                            <ul class="list-unstyled">
+                                <!-- Facebook -->
+                                @{
+                                    if (member.Fb != null)
+                                    {
+                                        <a class="icons-sm fb-ic" href="@member.Fb">
+                                            <i class="fa fa-facebook blue-text"></i>
+                                        </a>
+                                    }
+                                    if (member.Git != null)
+                                    {
+                                        <!-- Twitter -->
+                                        <a class="icons-sm tw-ic">
+                                            <i class="fa fa-github blue-text"> </i>
+                                        </a>
+                                    }
+                                    if (member.Instragram != null)
+                                    {
+                                        <a class="icons-sm ins-ic">
+                                            <i class="fa fa-instagram blue-text"> </i>
+                                        </a>
+                                    }
+                                    if (member.Gmail != null)
+                                    {
+                                        <a class="icons-sm ins-ic">
+                                            <i class="fa fa-envelope blue-text"> </i>
+                                        </a>
+                                    }
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</section>
+
+<section id="doc" class="bg-dark text-white">
+    <div class="container text-center">
+        <h2 class="mb-4">Susipažinkite su programėle</h2>
+        <a class="btn btn-light btn-xl sr-button" asp-controller="Home" asp-action="Doc">Dokumentacija</a>
+    </div>
+</section>
+
+<section id="contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="section-heading">Susisiekime!</h2>
+                <hr class="my-4">
+                <p class="mb-5">Norite padėti įgyvendinti projektą? Tai puiku! Atsiųskite mums el. Laišką ir mes kuo greičiau susisieksime su jumis!</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 mr-auto text-center">
+                <i class="fa fa-envelope-o fa-3x mb-6 sr-contact"></i>
+                <p>
+                    <a href="mailto:your-email@your-domain.com">@Model.Gmail</a>
+                    @*<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">SEND MESSAGE</button>*@
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+@*<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal Header</h4>
+            </div>
+            <div class="modal-body">
+                <p>Some text in the modal.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>*@

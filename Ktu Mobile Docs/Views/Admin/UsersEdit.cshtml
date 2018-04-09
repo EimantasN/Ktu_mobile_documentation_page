@@ -1,0 +1,60 @@
+﻿@model KTU_Mobile_Data.User
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<h4>User</h4>
+<hr />
+<div class="row">
+    <div class="col-12">
+        <form asp-action="UsersEdit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Pareigos" class="control-label"></label>
+                <input asp-for="Pareigos" class="form-control" />
+                <span asp-validation-for="Pareigos" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Fb" class="control-label"></label>
+                <input asp-for="Fb" class="form-control" />
+                <span asp-validation-for="Fb" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Git" class="control-label"></label>
+                <input asp-for="Git" class="form-control" />
+                <span asp-validation-for="Git" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Gmail" class="control-label"></label>
+                <input asp-for="Gmail" class="form-control" />
+                <span asp-validation-for="Gmail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Instragram" class="control-label"></label>
+                <input asp-for="Instragram" class="form-control" />
+                <span asp-validation-for="Instragram" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Image" class="control-label"></label>
+                <input asp-for="Image" class="form-control" />
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
