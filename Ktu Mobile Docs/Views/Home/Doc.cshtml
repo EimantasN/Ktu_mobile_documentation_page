@@ -22,39 +22,47 @@
             <div class="jumbotron">
                 <h1>KTU MOBILE</h1>
                 <br><br>
-
-                <h2>@Model.info.First().Name</h2>
-                <p>@Model.info.First().Text</p>
-                <br>
-            </div>
-            @{
-                int nr = 2;
-                bool yra = true;
-                while (yra)
-                {
-                    yra = false;
-                    try
+                @{
+                    if (Model.info.Count() > 0)
                     {
-                        var item = Model.info.First(x => x.Nr == nr);
-                        if (item != null)
-                        {
-                            yra = true;
-                            nr++;
-                            <h2>@item.Name</h2>
-                            <br>
-                            <div class="well">
-                                @Html.Raw(item.Text)
-                            </div>
-                            <br>
+                        <h2>@Model.info.First().Name</h2>
+                        <p>@Model.info.First().Text</p>
+                        <br>
+
                         }
                     }
-                    catch
+                </div>
+                @{
+                    if (Model.info.Count() > 0)
                     {
-                        yra = false;
-                    }
-                }
+                        int nr = 2;
+                        bool yra = true;
+                        while (yra)
+                        {
+                            yra = false;
+                            try
+                            {
+                                var item = Model.info.First(x => x.Nr == nr);
+                                if (item != null)
+                                {
+                                    yra = true;
+                                    nr++;
+                                <h2>@item.Name</h2>
+                                <br>
+                                <div class="well">
+                                    @Html.Raw(item.Text)
+                                </div>
+                                <br>
+                                    }
+                                }
+                                catch
+                                {
+                                    yra = false;
+                                }
+                            }
+                        }
 
-            }
-        </div>
-    </div><!--/row-->
-</div><!--/.fluid-container-->
+                    }
+            </div>
+        </div><!--/row-->
+    </div><!--/.fluid-container-->

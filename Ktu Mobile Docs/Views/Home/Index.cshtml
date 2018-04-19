@@ -1,8 +1,18 @@
-﻿@model Ktu_Mobile_Docs.Models.MainPage
+﻿@using Microsoft.AspNetCore.Identity
+@using KTU_Mobile_Data
+
+@inject KTU_Mobile_Services.IData service
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@model Ktu_Mobile_Docs.Models.MainPage
 @{
     ViewData["Title"] = "Main page";
 }
-
+    @if (SignInManager.IsSignedIn(User))
+    {
+        await SignInManager.SignOutAsync();
+    }
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
         <a class="navbar-brand js-scroll-trigger" href="#page-top" style="padding-top: 1.3rem; font-size: 15px">KTU MOBILE</a>
@@ -12,7 +22,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="#about">Apie mūsų idėją</a>
+                    <a class="nav-link js-scroll-trigger" href="#about">Projekto tikslas</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link js-scroll-trigger" href="#services">Tikslai</a>
@@ -41,7 +51,7 @@
                 <hr>
             </div>
             <div class="col-lg-8 mx-auto">
-                <p class="text-faded mb-5">Visos KTU sistemos android programėlėje</p>
+                <p class="text-faded mb-5">Išmanioji Moodle + Akademinė informacinė Sistemos (AIS) Android programėlė Jūsų mobiliame įrenginyje</p>
                 <a class="btn btn-dark btn-xl js-scroll-trigger" href="@Model.Google_store_app">Atsisiųsti app</a>
                 <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">Sužinoti daugiau</a>
                 <a class="btn btn-info btn-xl js-scroll-trigger" href="@Model.Git_hub_link">Source CODE</a>
@@ -56,7 +66,7 @@
             <div class="col-lg-8 mx-auto text-center">
                 <h2 class="section-heading text-white">Projekto idėja</h2>
                 <hr class="light my-4">
-                <p class="text-faded mb-4">Atsižvelgus į kasdienes studento problemas kartu su komanda sugalvojome Stelper mobiliosios programėlės idėją. Tai programėlė, leidžianti studentui lengviau pasiruošti atsiskaitymams ir planuoti mokymosi laiką.</p>
+                <p class="text-faded mb-4">Aštuoni informatikos inžinerijos studijų programos studentai susijungė, kad sukurtų projektą mokymosi tikslais. Išanalizavę Kauno Technologijos Universiteto studentų poreikius, bei kaip jiems suteikti didesnio patogumo naudojantis pagrindinėmis universiteto sistemomis. Projekte KTU sistemos sujungiamos į vieną, kuriuos pagalba bus galima pasiekti viską vos keliais išmanaus mobiliojo įrenginio ekrano paspaudimais.</p>
                 <a class="btn btn-light btn-xl js-scroll-trigger" href="#services">Pradėkime!</a>
             </div>
         </div>
@@ -78,28 +88,28 @@
                 <div class="service-box mt-5 mx-auto">
                     <i class="fa fa-2x fa-diamond text-primary mb-3 sr-icons"></i>
                     <h3 class="mb-3 service-header">Patikimumas</h3>
-                    <p class="text-muted mb-0 service-text">Musų programa kuriama su naujausiais įrankiais</p>
+                    <p class="text-muted mb-0 service-text">Mūsų programa kuriama su naujausiais įrankiais, todėl ji veikia sklandžiai ir efektyviai</p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 text-center">
                 <div class="service-box mt-5 mx-auto">
                     <i class="fa fa-2x fa-paper-plane text-primary mb-3 sr-icons"></i>
                     <h3 class="mb-3 service-header">Visada parengta naudojimui</h3>
-                    <p class="text-muted mb-0 service-text">Užtikrintas programos veikimas</p>
+                    <p class="text-muted mb-0 service-text">Programuotojai užtikrina programos veikimą, o iškilusias problemas stengiamasi kuo greičiau ištaisyti</p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 text-center">
                 <div class="service-box mt-5 mx-auto">
                     <i class="fa fa-2x fa-newspaper-o text-primary mb-3 sr-icons"></i>
                     <h3 class="mb-3 service-header">Atnaujinimai</h3>
-                    <p class="text-muted mb-0 service-text">Mes atnaujiname priklausomybes, kad viskas būtų šviežia</p>
+                    <p class="text-muted mb-0 service-text">Mes atnaujiname priklausomybes (angl. Dependecies), kad viskas būtų atnaujinta</p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 text-center">
                 <div class="service-box mt-5 mx-auto">
                     <i class="fa fa-2x fa-heart text-primary mb-3 sr-icons"></i>
-                    <h3 class="mb-sm-3 service-header">Pagaminta su studentų studentams</h3>
-                    <p class="text-muted mb-0 service-text">Kuriame tik tai kas naudinga</p>
+                    <h3 class="mb-sm-3 service-header">Pagaminta studentų studentams</h3>
+                    <p class="text-muted mb-0 service-text">Kuriame tik tai kas naudinga ir reikalinga</p>
                 </div>
             </div>
         </div>
@@ -112,7 +122,7 @@
             <div class="col-lg-8 mx-auto text-center">
                 <h2 class="section-heading" style="color: white">Musų komanda</h2>
                 <hr class="light my-4">
-                <p class="text-faded mb-4">Susipažinkime</p>
+                <p class="text-faded mb-4">Susipažinkime!</p>
             </div>
         </div>
     </div>
@@ -195,9 +205,9 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 mx-auto text-center">
-                <h2 class="section-heading">Susisiekime!</h2>
+                <h2 class="section-heading">Susisiekite!</h2>
                 <hr class="my-4">
-                <p class="mb-5">Norite padėti įgyvendinti projektą? Tai puiku! Atsiųskite mums el. Laišką ir mes kuo greičiau susisieksime su jumis!</p>
+                <p class="mb-5">Norite pagelbėti projekto palaikomumo procese? Atsiųskite mums el. Laišką su pasiūlymais ir pastebėjimais ir mes kuo greičiau susisieksime su Jumis, bei atkreipsime dėmesį į programėlės patobulinimus! Komanda yra labai dėkinga už bendradarbiavimą.</p>
             </div>
         </div>
         <div class="row">
@@ -213,22 +223,22 @@
 </section>
 
 @*<!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
 
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Modal Header</h4>
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Some text in the modal.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
             </div>
-            <div class="modal-body">
-                <p>Some text in the modal.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
+
         </div>
-
-    </div>
-</div>*@
+    </div>*@

@@ -39,7 +39,8 @@ namespace Ktu_Mobile_Docs.Controllers
             {
                 var model = new IndexAdmin
                 {
-                    UserID = await _Service.GetMember(User.Identity.Name),
+                    //UserID = await _Service.GetMember(User.Identity.Name),
+                    UserID = null,
                     latestinfo = await _context.Log.ToListAsync(),
                     members = await _context.Members.Include(log => log.Log).ToListAsync()
                 };
@@ -73,7 +74,8 @@ namespace Ktu_Mobile_Docs.Controllers
             if (ModelState.IsValid)
             {
                 _context.Add(category);
-                await _Service.addlog("Pridėjo nauja skiltį \""+ category.Name +"\" dokumentacijose. Nr - " + category.Nr, null, User.Identity.Name, null);
+                //await _Service.addlog("Pridėjo nauja skiltį \""+ category.Name +"\" dokumentacijose. Nr - " + category.Nr, null, User.Identity.Name, null);
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(CategoryIndex));
             }
             return View(category);
@@ -109,7 +111,8 @@ namespace Ktu_Mobile_Docs.Controllers
                 try
                 {
                     _context.Update(category);
-                    await _Service.addlog("Atnaujino skiltį \"" + category.Name + "\" dokumentacijose. Nr - " + category.Nr, null, User.Identity.Name, null);
+                    //await _Service.addlog("Atnaujino skiltį \"" + category.Name + "\" dokumentacijose. Nr - " + category.Nr, null, User.Identity.Name, null);
+                    await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -151,7 +154,7 @@ namespace Ktu_Mobile_Docs.Controllers
         public async Task<IActionResult> CategoryDeleteConfirmed(int id)
         {
             var category = await _context.Categorys.SingleOrDefaultAsync(m => m.Id == id);
-            await _Service.addlog("Ištrynė skiltį \"" + category.Name + "\" dokumentacijose. Nr - " + category.Nr, null, User.Identity.Name, null);
+            ///await _Service.addlog("Ištrynė skiltį \"" + category.Name + "\" dokumentacijose. Nr - " + category.Nr, null, User.Identity.Name, null);
             _context.Categorys.Remove(category);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(CategoryIndex));
@@ -204,7 +207,8 @@ namespace Ktu_Mobile_Docs.Controllers
                 try
                 {
                     _context.Update(user);
-                    await _Service.addlog("Atnaujino asmeninę informaciją \"" + user.Name, null, User.Identity.Name, null);
+                    //await _Service.addlog("Atnaujino asmeninę informaciją \"" + user.Name, null, User.Identity.Name, null);
+                    await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -407,7 +411,8 @@ namespace Ktu_Mobile_Docs.Controllers
                 try
                 {
                     _context.Update(main_page);
-                    await _Service.addlog("Atnaujino pagrindinę puslapio informaciją", null, User.Identity.Name, null);
+                    //await _Service.addlog("Atnaujino pagrindinę puslapio informaciją", null, User.Identity.Name, null);
+                    await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -458,13 +463,15 @@ namespace Ktu_Mobile_Docs.Controllers
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, true, lockoutOnFailure: false);
-                await _Service.addlog("User logged in ", null, model.Email, null);
+                //await _Service.addlog("User logged in ", null, model.Email, null);
+                await _context.SaveChangesAsync();
                 if (result.Succeeded)
                 {
                     //_logger.LogInformation("User logged in.");
                     return RedirectToAction("Index", "Admin");
                 }
-                else {
+                else
+                {
                     return RedirectToAction("Login", "Admin");
                 }
             }
@@ -591,23 +598,25 @@ namespace Ktu_Mobile_Docs.Controllers
                 //int pos = Array.FindIndex(arr, x => x.ToLower() == model.Email.ToLower());
                 //if (pos > -1)
                 //{
-                    var user = new ApplicationUser { UserName = model.Email, Email = model.Email, EmailConfirmed = true };
-                    var result = await _userManager.CreateAsync(user, model.Password);
-                    if (result.Succeeded)
-                    {
-                        //_logger.LogInformation("User created a new account with password.");
-                        await _Service.addlog("User created a new account with password.", null, model.Email, null);
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, EmailConfirmed = true };
+                var result = await _userManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    //_logger.LogInformation("User created a new account with password.");
+                    //await _Service.addlog("User created a new account with password.", null, model.Email, null);
 
-                        var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                        var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
-                        //await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
+                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
+                    //await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
 
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        //_logger.LogInformation("User created a new account with password.");
-                        await _Service.addlog("User created a new account with password.", null, model.Email, null);
-                        return RedirectToAction("Index", "Admin");
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    //_logger.LogInformation("User created a new account with password.");
+                    //await _Service.addlog("User created a new account with password.", null, model.Email, null);
+                   await _context.SaveChangesAsync();
+                    return RedirectToAction("Index", "Admin");
                 }
-                    AddErrors(result);
+                return RedirectToAction("Login", "Admin");
+                //AddErrors(result);
                 //}
                 //return RedirectToAction("Index", "Admin");
             }
@@ -627,7 +636,8 @@ namespace Ktu_Mobile_Docs.Controllers
             var user = await _userManager.FindByIdAsync(userId);
             if (user == null)
             {
-                await _Service.addlog("Unable to load user with ID .", Int32.Parse(userId), null, null);
+                //await _Service.addlog("Unable to load user with ID .", Int32.Parse(userId), null, null);
+                await _context.SaveChangesAsync();
                 throw new ApplicationException($"Unable to load user with ID '{userId}'.");
             }
             var result = await _userManager.ConfirmEmailAsync(user, code);
